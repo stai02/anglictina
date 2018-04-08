@@ -120,17 +120,26 @@ public class Controller extends GridPane {
 	
 	public void getSlovo(){
 		hadaj.setText(hra.getAnglickeSlovo());
+		hadaj.setDisable(true);
+
 		}
 	
 	public void skontrolujOdpoved(Event event) {
 		Button tlacidlo = (Button) event.getSource();
+		
+		String odpoved = tlacidlo.getText();
+		String slovo = hra.getSlovnik().get(hadaj.getText()).getMeno();
+		String vysledok = hra.getVysledok(odpoved, slovo).get(0);
+		String skore = hra.getVysledok(odpoved, slovo).get(1);
+		hra.skore(odpoved, slovo);
+		
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Skóre");
-		alert.setHeaderText(hra.getVysledok(tlacidlo.getText(),hra.getSlovnik().get(hadaj.getText()).getMeno()).get(0));
+		alert.setHeaderText(vysledok);
 		alert.showAndWait();
-		if (hra.getVysledok(tlacidlo.getText(),hra.getSlovnik().get(hadaj.getText()).getMeno()).get(1).equals("spravne")) {
+		if (skore.equals("spravne")) {
 			spravne.setText(String.valueOf(hra.getPocetSpravnych()));
-		} else if (hra.getVysledok(tlacidlo.getText(),hra.getSlovnik().get(hadaj.getText()).getMeno()).get(1).equals("nespravne")) {
+		} else if (skore.equals("nespravne")) {
 			nespravne.setText(String.valueOf(hra.getPocetNespravnych()));
 		}
 		noveKoloHry();

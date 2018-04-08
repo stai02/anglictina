@@ -18,6 +18,9 @@ public class Hra {
 	public int nespravne;
 	
 	public Hra() {
+		spravne = 0;
+		nespravne = 0;
+		
 		vysledok = new ArrayList<String>();
 		slovnik = new HashMap<String,Slovo>();
 		slovnikAnglickychSlov = new ArrayList<String>();  
@@ -69,18 +72,18 @@ public class Hra {
 		slovnikCeskychSlov.add("hruska");
 		slovnikCeskychSlov.add("pomaranc"); 
 		slovnikCeskychSlov.add("kvet"); 
-		slovnikCeskychSlov.add("vtak");//
-		slovnikCeskychSlov.add("mrkva");//
+		slovnikCeskychSlov.add("vtak");
+		slovnikCeskychSlov.add("mrkva");
 		slovnikCeskychSlov.add("zosit");
 		slovnikCeskychSlov.add("ceruzka");
-		slovnikCeskychSlov.add("salka");//
-		slovnikCeskychSlov.add("pohar");//
-		slovnikCeskychSlov.add("vidlicka");//
+		slovnikCeskychSlov.add("salka");
+		slovnikCeskychSlov.add("pohar");
+		slovnikCeskychSlov.add("vidlicka");
 		slovnikCeskychSlov.add("kniha");
 		slovnikCeskychSlov.add("kolac");
 		slovnikCeskychSlov.add("sopka");
 		slovnikCeskychSlov.add("budik");
-		slovnikCeskychSlov.add("liska");//
+		slovnikCeskychSlov.add("liska");
 		
 		slovnikAnglickychSlov.add(oblak.getPreklad());
 		slovnikAnglickychSlov.add(auto.getPreklad());
@@ -151,15 +154,21 @@ public class Hra {
 	
 	public List<String> getVysledok(String odpoved, String slovo) {
 		if (odpoved.equals(slovo)) {
-			vysledok.add("Správna odpoveď !");
-			spravne++;
-			vysledok.add("spravne");
+			vysledok.add(0,"Správna odpoveď !");
+			vysledok.add(1,"spravne");
 		} else {
-			vysledok.add("Nesprávna odpoveď !");
-			nespravne++;
-			vysledok.add("nespravne");
+			vysledok.add(0,"Nesprávna odpoveď !");
+			vysledok.add(1,"nespravne");
 		}
 		return vysledok;
+	}
+	
+	public void skore(String odpoved, String slovo) {
+		if (odpoved.equals(slovo)) {
+			spravne=spravne+1;
+		} else {
+			nespravne=nespravne+1;
+		}
 	}
 	
 	public int getPocetSpravnych() {
