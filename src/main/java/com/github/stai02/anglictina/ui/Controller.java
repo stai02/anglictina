@@ -7,6 +7,7 @@ import com.github.stai02.anglictina.logika.Hra;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -40,6 +41,10 @@ public class Controller extends GridPane {
 		noveKoloHry(); 
 		}
 	
+	public void koniec() {
+		System.exit(0);
+	}
+	
 	public void noveKoloHry() {
 		
 		//vytvorí sa zoznam anglických slov pre hru
@@ -55,14 +60,15 @@ public class Controller extends GridPane {
 		topLeft.fitHeightProperty().bind(tl.widthProperty());
 		tl.setGraphic(topLeft);
 		tl.setText(hra.getSlovnik().get(hra.getAnglickyZoznam().get(1)).getMeno());
-
+		tl.setPadding(new Insets(0));
+		
 		String image_tr = hra.getSlovnik().get(hra.getAnglickyZoznam().get(2)).getBezDiakritiky()+".png";
 		Image image2 = new Image(getClass().getResourceAsStream(image_tr));
 		ImageView topRight = new ImageView();
 		topRight.setImage(image2);
 		tr.setGraphic(topRight);
 		tr.setText(hra.getSlovnik().get(hra.getAnglickyZoznam().get(2)).getMeno());
-
+		tr.setPadding(new Insets(0));
 		
 		String image_cl =  hra.getSlovnik().get(hra.getAnglickyZoznam().get(3)).getBezDiakritiky()+".png";
 		Image image3 = new Image(getClass().getResourceAsStream(image_cl));
@@ -70,7 +76,7 @@ public class Controller extends GridPane {
 		centerLeft.setImage(image3);
 		cl.setGraphic(centerLeft);
 		cl.setText(hra.getSlovnik().get(hra.getAnglickyZoznam().get(3)).getMeno());
-
+		cl.setPadding(new Insets(0));
 		
 		String image_cr = hra.getSlovnik().get(hra.getAnglickyZoznam().get(4)).getBezDiakritiky()+".png";
 		Image image4 = new Image(getClass().getResourceAsStream(image_cr));
@@ -78,7 +84,7 @@ public class Controller extends GridPane {
 		centerRight.setImage(image4);
 		cr.setGraphic(centerRight);
 		cr.setText(hra.getSlovnik().get(hra.getAnglickyZoznam().get(4)).getMeno());
-
+		cr.setPadding(new Insets(0));
 		
 		String image_bl = hra.getSlovnik().get(hra.getAnglickyZoznam().get(5)).getBezDiakritiky()+".png";
 		Image image5 = new Image(getClass().getResourceAsStream(image_bl));
@@ -86,7 +92,7 @@ public class Controller extends GridPane {
 		bottomLeft.setImage(image5);
 		bl.setGraphic(bottomLeft);
 		bl.setText(hra.getSlovnik().get(hra.getAnglickyZoznam().get(5)).getMeno());
-
+		bl.setPadding(new Insets(0));
 		
 		String image_br = hra.getSlovnik().get(hra.getAnglickyZoznam().get(6)).getBezDiakritiky()+".png";
 		Image image6 = new Image(getClass().getResourceAsStream(image_br));
@@ -94,7 +100,7 @@ public class Controller extends GridPane {
 		bottomRight.setImage(image6);
 		br.setGraphic(bottomRight);
 		br.setText(hra.getSlovnik().get(hra.getAnglickyZoznam().get(6)).getMeno());
-
+		br.setPadding(new Insets(0));
 		
 		String text_tl = hra.getSlovnik().get(hra.getAnglickyZoznam().get(1)).getMeno();
 		Tooltip tooltip_tl = new Tooltip(text_tl);
@@ -121,7 +127,6 @@ public class Controller extends GridPane {
 	public void getSlovo(){
 		hadaj.setText(hra.getAnglickeSlovo());
 		hadaj.setDisable(true);
-
 		}
 	
 	public void skontrolujOdpoved(Event event) {
