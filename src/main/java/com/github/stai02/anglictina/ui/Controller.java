@@ -34,9 +34,13 @@ public class Controller extends GridPane {
 	@FXML public Button bl;
 	@FXML public Button br;
 
-		
+	
 	public void initialize(Hra hra) {
 		this.hra = hra;
+		noveKoloHry(); 
+		}
+	
+	public void noveKoloHry() {
 		
 		//vytvorí sa zoznam anglických slov pre hru
 		hra.vytvorAnglickyZoznam();
@@ -110,29 +114,25 @@ public class Controller extends GridPane {
 		String text_br = hra.getSlovnik().get(hra.getAnglickyZoznam().get(6)).getMeno();
 		Tooltip tooltip_br = new Tooltip(text_br);
 		Tooltip.install(br, tooltip_br);
+		hadaj.setDisable(false);
+		hadaj.setText("Hádej");
 	}
 	
 	public void getSlovo(){
 		hadaj.setText(hra.getAnglickeSlovo());
-		hadaj.setDisable(true);
 		}
 	
 	public void skontrolujOdpoved(Event event) {
 		Button tlacidlo = (Button) event.getSource();
-		String odpoved = tlacidlo.getText();
-		String slovo = hra.getSlovnik().get(hadaj.getText()).getMeno();
-		String vysledok = hra.getVysledok(odpoved,slovo);
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Skóre");
-		alert.setHeaderText(vysledok);
+		alert.setHeaderText(hra.getVysledok(tlacidlo.getText(),hra.getSlovnik().get(hadaj.getText()).getMeno()).get(0));
 		alert.showAndWait();
-		novaHra();
-	}
-	
-	public void novaHra() {
-		Hra nova = new Hra();
-		initialize(nova);
-		hadaj.setDisable(false);
-		hadaj.setText("Hádej");
+		if (hra.getVysledok(tlacidlo.getText(),hra.getSlovnik().get(hadaj.getText()).getMeno()).get(1).equals("spravne")) {
+			spravne.setText(String.valueOf(hra.getPocetSpravnych()));
+		} else if (hra.getVysledok(tlacidlo.getText(),hra.getSlovnik().get(hadaj.getText()).getMeno()).get(1).equals("nespravne")) {
+			nespravne.setText(String.valueOf(hra.getPocetNespravnych()));
+		}
+		noveKoloHry();
 	}
 }

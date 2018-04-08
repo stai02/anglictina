@@ -13,8 +13,12 @@ public class Hra {
 	private List<String> slovnikAnglickychSlov;	// zoznam anglických slov v slovníku
 	private List<String> zoznamCeskychSlov; // 6 českých slov pre aplikáciu
 	private List<String> zoznamAnglickychSlov; // 6 anglických slov pre aplikáciu
+	private List<String> vysledok;
+	public int spravne;
+	public int nespravne;
 	
 	public Hra() {
+		vysledok = new ArrayList<String>();
 		slovnik = new HashMap<String,Slovo>();
 		slovnikAnglickychSlov = new ArrayList<String>();  
 		slovnikCeskychSlov = new ArrayList<String>(); 
@@ -145,14 +149,25 @@ public class Hra {
 		return zoznamAnglickychSlov;
 	}
 	
-	public String getVysledok(String odpoved, String slovo) {
-		String vysledok;
+	public List<String> getVysledok(String odpoved, String slovo) {
 		if (odpoved.equals(slovo)) {
-			vysledok = "Správna odpoveď !";
+			vysledok.add("Správna odpoveď !");
+			spravne++;
+			vysledok.add("spravne");
 		} else {
-			vysledok = "Nesprávna odpoveď !";
+			vysledok.add("Nesprávna odpoveď !");
+			nespravne++;
+			vysledok.add("nespravne");
 		}
 		return vysledok;
+	}
+	
+	public int getPocetSpravnych() {
+		return this.spravne;	
+	}
+	
+	public int getPocetNespravnych() {
+		return this.nespravne;
 	}
 	
 	public String getAnglickeSlovo() {
