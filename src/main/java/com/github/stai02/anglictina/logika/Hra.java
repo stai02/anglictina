@@ -144,5 +144,20 @@ public class Hra {
 	public List<String> getAnglickyZoznam() {
 		return zoznamAnglickychSlov;
 	}
+	
+	public String getVysledok(String odpoved, String slovo) {
+		String vysledok;
+		if (odpoved.equals(slovo)) {
+			vysledok = "Správna odpoveď !";
+		} else {
+			vysledok = "Nesprávna odpoveď !";
+		}
+		return vysledok;
+	}
+	
+	public String getAnglickeSlovo() {
+		String slovo = getAnglickyZoznam().get(new Random().nextInt(getAnglickyZoznam().size()));
+		return slovo;
+	}
 
 }
